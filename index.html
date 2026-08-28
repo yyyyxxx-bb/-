@@ -214,6 +214,46 @@
   </main>
 </div>
 
+<!-- FENGHE DETAIL -->
+<div id="view-detail-fenghe" hidden>
+  <div class="d-nav"><div class="wrap" style="display:flex;align-items:center;justify-content:space-between;height:56px">
+    <a href="#work" style="font-size:14px;color:var(--ink2)">← 返回 Back</a>
+    <span style="font-size:14px;font-weight:500">FengHe ChaXv — Tea Brand VI</span>
+    <a href="#work" style="font-size:13px;color:var(--ink3)">作品集</a>
+  </div></div>
+  <main class="wrap">
+    <section class="d-hero">
+      <div class="d-tag"><b>品牌设计 Brand Design</b><span>2025</span></div>
+      <h1>风禾茶叙 · 茶品牌VI<span>FengHe ChaXv — Tea Brand VI</span></h1>
+      <p class="d-desc">茶品牌视觉形象系统：叶形标志与中英文标准字、标准色与色彩系统、辅助图形、IP 吉祥物，以及名片、纸杯、包装、导视等应用。
+        <span>Tea brand identity — leaf logo &amp; bilingual wordmark, color system, auxiliary graphics, IP mascot, and business card, cup, packaging and wayfinding applications.</span>
+      </p>
+    </section>
+    <section class="d-gallery" id="galF"></section>
+    <section class="d-back"><a href="#work" style="color:var(--ink)">← 返回作品集 · All Works</a></section>
+  </main>
+</div>
+
+<!-- TAIHETANG DETAIL -->
+<div id="view-detail-taihetang" hidden>
+  <div class="d-nav"><div class="wrap" style="display:flex;align-items:center;justify-content:space-between;height:56px">
+    <a href="#work" style="font-size:14px;color:var(--ink2)">← 返回 Back</a>
+    <span style="font-size:14px;font-weight:500">Taihetang — Herbal Tea Brand VI</span>
+    <a href="#work" style="font-size:13px;color:var(--ink3)">作品集</a>
+  </div></div>
+  <main class="wrap">
+    <section class="d-hero">
+      <div class="d-tag"><b>品牌设计 Brand Design</b><span>2025</span></div>
+      <h1>太和堂凉茶 · 品牌VI<span>Taihetang — Herbal Tea Brand VI</span></h1>
+      <p class="d-desc">凉茶品牌视觉系统：葫芦标志与“太和堂凉茶”标准字、标准色与辅助图形、古方标语，以及物料、杯套、海报、菜单、杯贴等应用。
+        <span>Herbal tea identity — gourd logo &amp; wordmark, color/auxiliary graphics, heritage slogan, and products, cup sleeve, posters, menu and stickers.</span>
+      </p>
+    </section>
+    <section class="d-gallery" id="galT"></section>
+    <section class="d-back"><a href="#work" style="color:var(--ink)">← 返回作品集 · All Works</a></section>
+  </main>
+</div>
+
 <script>
   const base = 'zebin-portfolio/public/images/zaolou/';
   const gal = [
@@ -236,6 +276,28 @@
   document.getElementById('gal6').innerHTML = gal6.map(([f,l]) =>
     `<figure><img src="${base6}${f}" alt="${l}" loading="lazy"><figcaption>${l}</figcaption></figure>`).join('');
 
+  // FENGHE gallery
+  const baseF = 'zebin-portfolio/public/images/fenghe/';
+  const galF = [
+    ['01-cover.jpg','封面 Cover'],['02-logo-grid.jpg','标志标准制图 Logo Grid'],['03-wordmark.jpg','中文标准字 Wordmark'],
+    ['04-english.jpg','英文标准字 English Mark'],['05-colors.jpg','标准色 Standard Colors'],['06-color-system.jpg','色彩系统 Color System'],
+    ['07-graphics.jpg','辅助图形 Auxiliary Graphics'],['08-lockup.jpg','标志组合 Logo Lockup'],['09-mascot.jpg','吉祥物 Mascot'],
+    ['10-business-card.jpg','名片 Business Card'],['11-cup.jpg','纸杯 Cup'],['12-wayfinding.jpg','导视应用 Wayfinding']
+  ];
+  document.getElementById('galF').innerHTML = galF.map(([f,l]) =>
+    `<figure><img src="${baseF}${f}" alt="${l}" loading="lazy"><figcaption>${l}</figcaption></figure>`).join('');
+
+  // TAIHETANG gallery
+  const baseT = 'zebin-portfolio/public/images/taihetang/';
+  const galT = [
+    ['01-cover.jpg','封面 Cover'],['02-typography.jpg','字体设计 Typography'],['03-colors.jpg','标准色 Standard Colors'],
+    ['04-logo.jpg','标志 Logo'],['05-graphics.jpg','辅助图形 Auxiliary Graphics'],['06-slogan.jpg','品牌标语 Slogan'],
+    ['07-products.jpg','物料产品 Products'],['08-cup-sleeve.jpg','杯套 Cup Sleeve'],['09-fridge-poster.jpg','冰箱海报 Fridge Poster'],
+    ['10-menu.jpg','菜单设计 Menu'],['11-store-poster.jpg','店内海报 Store Poster'],['12-cup-sticker.jpg','杯贴 Cup Sticker']
+  ];
+  document.getElementById('galT').innerHTML = galT.map(([f,l]) =>
+    `<figure><img src="${baseT}${f}" alt="${l}" loading="lazy"><figcaption>${l}</figcaption></figure>`).join('');
+
   // Categories + placeholders
   const cats = [['all','全部 All','on'],['brand','品牌设计 Brand',''],['ip','IP设计',''],['packaging','包装设计 Packaging',''],['comprehensive','综合设计 Comprehensive',''],['photo','摄影摄像 Photo','']];
   document.getElementById('chips').innerHTML = cats.map(([id,label,on]) =>
@@ -244,6 +306,8 @@
   const items = [
     ['brand-sixi','四喜财神 · IP 品牌合作手册','SIXI — IP Brand Manual','IP设计','2026','zebin-portfolio/public/images/sixi-cover.jpg',true],
     ['brand-zaolou','灶楼 · 开平煲仔饭品牌形象','Zaolou — Brand Identity','品牌设计 Brand','2026','zebin-portfolio/public/images/zaolou-cover.jpg',true],
+    ['brand-fenghe','风禾茶叙 · 茶品牌VI','FengHe ChaXv — Tea Brand VI','品牌设计 Brand','2025','zebin-portfolio/public/images/fenghe-cover.jpg',true],
+    ['brand-taihetang','太和堂凉茶 · 品牌VI','Taihetang — Herbal Tea Brand VI','品牌设计 Brand','2025','zebin-portfolio/public/images/taihetang-cover.jpg',true],
     ['ip-01','IP 设计 · 案例 01','IP Design 01','IP设计','2025','',false],
     ['packaging-01','包装设计 · 案例 01','Packaging 01','包装设计 Packaging','2024','',false],
     ['comprehensive-01','综合设计 · 案例 01','Comprehensive 01','综合设计 Comprehensive','2024','',false],
@@ -291,12 +355,16 @@
   function show(view){
     document.getElementById('view-detail').hidden = view!=='zaolou';
     document.getElementById('view-detail-sixi').hidden = view!=='sixi';
+    document.getElementById('view-detail-fenghe').hidden = view!=='fenghe';
+    document.getElementById('view-detail-taihetang').hidden = view!=='taihetang';
     document.getElementById('view-home').hidden = view!=='home';
   }
   function route(){
     const h = location.hash;
     if(h.startsWith('#/work/brand-sixi')){ show('sixi'); window.scrollTo(0,0); }
     else if(h.startsWith('#/work/brand-zaolou')){ show('zaolou'); window.scrollTo(0,0); }
+    else if(h.startsWith('#/work/brand-fenghe')){ show('fenghe'); window.scrollTo(0,0); }
+    else if(h.startsWith('#/work/brand-taihetang')){ show('taihetang'); window.scrollTo(0,0); }
     else {
       show('home');
       const id = h.replace('#','');
