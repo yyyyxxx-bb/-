@@ -83,6 +83,16 @@
   .d-gallery figcaption{font-size:13px;color:var(--ink3);letter-spacing:.04em;margin-top:14px}
   .d-back{border-top:1px solid var(--line);padding:52px 0;font-size:18px;font-weight:500}
 
+  /* Comprehensive sub-category gallery */
+  .subchips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px}
+  .subchips .c{padding:9px 18px;border-radius:999px;font-size:14px;background:var(--bgalt);color:var(--ink2);border:1px solid transparent;cursor:pointer}
+  .subchips .c span{font-size:12px;opacity:.7;margin-left:5px}
+  .subchips .c.on{background:var(--ink);color:#fff}
+  .comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:28px}
+  .comp-grid figure{margin:0}
+  .comp-grid img{width:100%;display:block;border-radius:24px;border:1px solid var(--line);background:var(--bgalt)}
+  .comp-grid figcaption{font-size:13px;color:var(--ink3);letter-spacing:.04em;margin-top:14px}
+
   @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.about-row,.contact-row{grid-template-columns:1fr;gap:26px}}
   @media(max-width:640px){
     .grid{grid-template-columns:1fr;gap:30px}.wrap,.nav-in,.foot{padding-left:20px;padding-right:20px}
@@ -137,6 +147,10 @@
       </div>
       <div class="chips" id="chips"></div>
       <div class="grid" id="grid"></div>
+      <div id="comp-wrap" hidden>
+        <div class="subchips" id="comp-tabs"></div>
+        <div class="comp-grid" id="comp-grid"></div>
+      </div>
     </div>
   </section>
 
@@ -254,6 +268,24 @@
   </main>
 </div>
 
+<!-- GENERIC DETAIL (packaging works) -->
+<div id="view-detail-generic" hidden>
+  <div class="d-nav"><div class="wrap" style="display:flex;align-items:center;justify-content:space-between;height:56px">
+    <a href="#work" style="font-size:14px;color:var(--ink2)">← 返回 Back</a>
+    <span id="g-title" style="font-size:14px;font-weight:500"></span>
+    <a href="#work" style="font-size:13px;color:var(--ink3)">作品集</a>
+  </div></div>
+  <main class="wrap">
+    <section class="d-hero">
+      <div class="d-tag"><b id="g-cat"></b><span id="g-year"></span></div>
+      <h1 id="g-h1">…<span id="g-h1e"></span></h1>
+      <p class="d-desc" id="g-desc"></p>
+    </section>
+    <section class="d-gallery" id="g-gal"></section>
+    <section class="d-back"><a href="#work" style="color:var(--ink)">← 返回作品集 · All Works</a></section>
+  </main>
+</div>
+
 <script>
   const base = 'zebin-portfolio/public/images/zaolou/';
   const gal = [
@@ -308,6 +340,9 @@
     ['brand-zaolou','灶楼 · 开平煲仔饭品牌形象','Zaolou — Brand Identity','品牌设计 Brand','2026','zebin-portfolio/public/images/zaolou-cover.jpg',true],
     ['brand-fenghe','风禾茶叙 · 茶品牌VI','FengHe ChaXv — Tea Brand VI','品牌设计 Brand','2025','zebin-portfolio/public/images/fenghe-cover.jpg',true],
     ['brand-taihetang','太和堂凉茶 · 品牌VI','Taihetang — Herbal Tea Brand VI','品牌设计 Brand','2025','zebin-portfolio/public/images/taihetang-cover.jpg',true],
+    ['pack-eel','鳗鱼包装盒','Bro Eel Packaging','包装设计 Packaging','2024','zebin-portfolio/public/images/packaging/eel.jpg',true],
+    ['pack-orange','橙子包装盒','Orange Gift Box','包装设计 Packaging','2024','zebin-portfolio/public/images/packaging/orange.jpg',true],
+    ['pack-rice','煲仔饭包装','Clay Pot Rice Packaging','包装设计 Packaging','2024','zebin-portfolio/public/images/packaging/rice.jpg',true],
     ['ip-01','IP 设计 · 案例 01','IP Design 01','IP设计','2025','',false],
     ['packaging-01','包装设计 · 案例 01','Packaging 01','包装设计 Packaging','2024','',false],
     ['comprehensive-01','综合设计 · 案例 01','Comprehensive 01','综合设计 Comprehensive','2024','',false],
@@ -338,7 +373,44 @@
     return {it, key};
   });
 
+  // ---- Comprehensive design: sub-categories ----
+  const compSubs = [
+    { id: 'font', zh: '字体设计', en: 'Typography' },
+    { id: 'logo', zh: 'Logo设计', en: 'Logo' },
+    { id: 'poster', zh: '海报设计', en: 'Poster' },
+    { id: 'book', zh: '书籍设计', en: 'Book' },
+    { id: 'ui', zh: 'UI设计', en: 'UI' }
+  ];
+  const baseC = 'zebin-portfolio/public/images/comprehensive/';
+  const compGallery = {
+    font: [ ['font-1.jpg','福纳门闲 · 书法字体'], ['font-2.jpg','品牌字标 · 风禾 / 灶楼 / Chosmo'] ],
+    logo: [ ['logo.jpg','品牌标志 · 太和堂 / 风禾'] ],
+    poster: [
+      ['poster-01.jpg','山水古诗 · 海报'], ['poster-02.jpg','从心开始 · 海报'], ['poster-03.jpg','中国精神 · 海报'],
+      ['poster-04.jpg','山河造境 · 海报'], ['poster-05.jpg','煲仔饭 · 海报'], ['poster-06.jpg','招牌推荐 · 美食海报'],
+      ['poster-07.jpg','太和堂凉茶 · 海报'], ['poster-08.jpg','山水画 · 海报'], ['poster-09.jpg','状元 · 海报']
+    ],
+    book: [ ['book.jpg','鸡娃 · 书籍设计'] ],
+    ui: [ ['ui.jpg','App 界面 · UI设计'] ]
+  };
+  let compActive = 'font';
+  function renderComp(){
+    document.getElementById('comp-tabs').innerHTML = compSubs.map(s =>
+      `<div class="c ${s.id===compActive?'on':''}" data-sub="${s.id}">${s.zh}<span>${s.en}</span></div>`).join('');
+    const imgs = compGallery[compActive] || [];
+    document.getElementById('comp-grid').innerHTML = imgs.map(([f,l]) =>
+      `<figure><img src="${baseC}${f}" alt="${l}" loading="lazy"><figcaption>${l}</figcaption></figure>`).join('');
+  }
+  document.getElementById('comp-tabs').addEventListener('click', e => {
+    const c = e.target.closest('.c'); if(!c) return;
+    compActive = c.dataset.sub; renderComp();
+  });
+
   function paint(cat){
+    const comp = cat === 'comprehensive';
+    document.getElementById('grid').hidden = comp;
+    document.getElementById('comp-wrap').hidden = !comp;
+    if(comp){ renderComp(); return; }
     const list = cat==='all' ? itemsWithCat : itemsWithCat.filter(x=>x.key===cat);
     document.getElementById('grid').innerHTML = list.map(x=>attach(x.it)).join('');
   }
@@ -351,12 +423,39 @@
     paint(c.dataset.cat);
   });
 
-  // ---- Router (home <-> zaolou detail) ----
+  // ---- Packaging works: generic detail ----
+  const packInfo = {
+    'pack-eel': { t:'鳗鱼包装盒', te:'Bro Eel Packaging', cat:'包装设计 Packaging', y:'2024',
+      d:'日式蒲烧鳗鱼“Bro 曼鳗”系列包装：内托、礼盒与提袋版式。',
+      de:'Japanese grilled eel “Bro” series packaging — insert trays, gift boxes and bags.',
+      img:'zebin-portfolio/public/images/packaging/eel.jpg' },
+    'pack-orange': { t:'橙子包装盒', te:'Orange Gift Box', cat:'包装设计 Packaging', y:'2024',
+      d:'“思橙楼”橙子礼盒：包装结构与插画视觉。',
+      de:'“Sichenglou” orange gift box — structure and illustration.',
+      img:'zebin-portfolio/public/images/packaging/orange.jpg' },
+    'pack-rice': { t:'煲仔饭包装', te:'Clay Pot Rice Packaging', cat:'包装设计 Packaging', y:'2024',
+      d:'“灶楼”煲仔饭系列包装：餐盒、外卖提袋与标贴。',
+      de:'“Zaolou” clay pot rice packaging — boxes, takeaway bags and labels.',
+      img:'zebin-portfolio/public/images/packaging/rice.jpg' }
+  };
+  function renderGeneric(id){
+    const w = packInfo[id]; if(!w) return;
+    document.getElementById('g-title').textContent = w.te;
+    document.getElementById('g-cat').textContent = w.cat;
+    document.getElementById('g-year').textContent = w.y;
+    document.getElementById('g-h1').innerHTML = w.t + '<span>' + w.te + '</span>';
+    document.getElementById('g-desc').innerHTML = w.d + '<span>' + w.de + '</span>';
+    document.getElementById('g-gal').innerHTML =
+      `<figure><img src="${w.img}" alt="${w.t}" loading="lazy"><figcaption>${w.t}</figcaption></figure>`;
+  }
+
+  // ---- Router ----
   function show(view){
     document.getElementById('view-detail').hidden = view!=='zaolou';
     document.getElementById('view-detail-sixi').hidden = view!=='sixi';
     document.getElementById('view-detail-fenghe').hidden = view!=='fenghe';
     document.getElementById('view-detail-taihetang').hidden = view!=='taihetang';
+    document.getElementById('view-detail-generic').hidden = view!=='generic';
     document.getElementById('view-home').hidden = view!=='home';
   }
   function route(){
@@ -365,6 +464,7 @@
     else if(h.startsWith('#/work/brand-zaolou')){ show('zaolou'); window.scrollTo(0,0); }
     else if(h.startsWith('#/work/brand-fenghe')){ show('fenghe'); window.scrollTo(0,0); }
     else if(h.startsWith('#/work/brand-taihetang')){ show('taihetang'); window.scrollTo(0,0); }
+    else if(h.startsWith('#/work/pack-')){ renderGeneric(h.slice('#/work/'.length)); show('generic'); window.scrollTo(0,0); }
     else {
       show('home');
       const id = h.replace('#','');
