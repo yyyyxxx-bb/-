@@ -51,6 +51,13 @@
   .duo>*,.grid2>*,.grid3>*,.grid4>*{min-width:0}
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
   .reveal.on{opacity:1;transform:none}
+  .handbook{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:28px;margin-top:72px;padding:44px 42px;border:1px solid var(--line);border-radius:24px;background:var(--bgalt);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1),border-color .2s ease}
+  .handbook:hover{border-color:var(--ink)}
+  .handbook h4{font-size:clamp(24px,3.2vw,36px);line-height:1.05;letter-spacing:-.03em;font-weight:600;margin:14px 0 0}
+  .handbook .hmeta{font-size:13px;color:var(--ink3);letter-spacing:.04em;margin:12px 0 0}
+  .handbook .hbtn{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:#fff;border-radius:999px;padding:14px 26px;font-size:15px;font-weight:600;white-space:nowrap;transition:opacity .2s ease}
+  .handbook .hbtn svg{width:16px;height:16px;flex:0 0 auto}
+  .handbook:hover .hbtn{opacity:.85}
   .close{background:#000;color:#fff;margin-top:96px;padding:88px 0}
   .close .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:32px;align-items:center}
   .close h4{font-size:clamp(26px,3.6vw,42px);line-height:1.05;letter-spacing:-.03em;font-weight:600;margin:0}
@@ -70,7 +77,7 @@
   .lightbox.tall{overflow:auto;align-items:flex-start;cursor:default}
   .lightbox.tall img{width:min(94vw,820px);max-width:none;max-height:none;margin:56px auto}
   .lightbox .x{position:absolute;top:20px;right:28px;color:#fff;font-size:32px;line-height:1;cursor:pointer;z-index:2}
-  @media(max-width:820px){.bar-in,.hero-in,.wrap{padding-left:20px;padding-right:20px}.intro-grid{grid-template-columns:1fr;gap:28px}.intro p{max-width:none}.hero-in{padding:66px 20px 52px}.sec-label{margin-top:66px}.duo,.grid2,.grid3{grid-template-columns:1fr}.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}.note{flex-direction:column;gap:8px}}
+  @media(max-width:820px){.bar-in,.hero-in,.wrap{padding-left:20px;padding-right:20px}.intro-grid{grid-template-columns:1fr;gap:28px}.intro p{max-width:none}.hero-in{padding:66px 20px 52px}.sec-label{margin-top:66px}.duo,.grid2,.grid3{grid-template-columns:1fr}.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}.note{flex-direction:column;gap:8px}.handbook{margin-top:52px;padding:32px 26px;gap:22px}}
   @media(max-width:640px){.bar .yr{display:none}.bar .mid{font-size:13px;letter-spacing:.02em}.fab{font-size:12px;padding:8px 13px}.fab.back{top:70px;left:14px}.fab.top{bottom:16px;right:14px}}
 </style></head>
 <body>
@@ -273,17 +280,17 @@
       <figcaption class="note"><b>粤财神系列卡</b><p>14 款配色</p></figcaption>
     </figure>
     <figure class="board reveal">
-      <div class="brow"><span>03.4</span><span class="en">Classic Series</span></div>
-      <div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/practice/sixi/sx-merch-04.jpg" alt="四喜财神潮玩 经典财神系列卡"></div>
-      <figcaption class="note"><b>经典财神系列卡</b><p>20 款配色</p></figcaption>
+      <div class="brow"><span>03.4</span><span class="en">Lion Dance Series</span></div>
+      <div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/practice/sixi/sx-merch-05.jpg" alt="四喜财神潮玩 醒狮系列卡"></div>
+      <figcaption class="note"><b>醒狮系列卡</b><p>12 款配色</p></figcaption>
     </figure>
   </div>
 
   <div class="duo">
     <figure class="board reveal">
-      <div class="brow"><span>03.5</span><span class="en">Lion Dance Series</span></div>
-      <div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/practice/sixi/sx-merch-05.jpg" alt="四喜财神潮玩 醒狮系列卡"></div>
-      <figcaption class="note"><b>醒狮系列卡</b><p>12 款配色</p></figcaption>
+      <div class="brow"><span>03.5</span><span class="en">Classic Series</span></div>
+      <div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/practice/sixi/sx-merch-04.jpg" alt="四喜财神潮玩 经典财神系列卡"></div>
+      <figcaption class="note"><b>经典财神系列卡</b><p>20 款配色</p></figcaption>
     </figure>
     <figure class="board reveal">
       <div class="brow"><span>03.6</span><span class="en">Opening Fans</span></div>
@@ -388,6 +395,16 @@
     <div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/practice/sixi/sx-biz-05.jpg" alt="四喜财神潮玩 名片设计"></div>
     <figcaption class="note"><b>名片设计</b><p>品牌名片 · 8 款</p></figcaption>
   </figure>
+
+  <!-- ================= 附：品牌手册 ================= -->
+  <a class="handbook reveal" href="assets/practice/sixi/sx-handbook.pdf" target="_blank" rel="noopener">
+    <div>
+      <div class="eyebrow">Handbook · 手册</div>
+      <h4>四喜财神潮玩手册</h4>
+      <p class="hmeta">招商建店手册 3.0 · 53 页 · PDF</p>
+    </div>
+    <span class="hbtn">打开手册<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/></svg></span>
+  </a>
 </section>
 
 <section class="close"><div class="wrap"><div>
