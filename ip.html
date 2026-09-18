@@ -99,6 +99,29 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementB
 <a class="fab back" href="comprehensive.html" title="返回上一级" aria-label="返回上一级"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>返回上一级</a>
 <a class="fab top" href="#" title="回到顶部" aria-label="回到顶部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">回到顶部<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></a>
 <script>
+/* 返回上一级：优先走浏览器后退，回到来源页原本的浏览位置 */
+(function(){
+  var KEY='zbScroll:';
+  window.addEventListener('pagehide',function(){try{sessionStorage.setItem(KEY+location.pathname,window.scrollY)}catch(e){}});
+  try{
+    var n=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];
+    if(n&&n.type==='back_forward'){
+      var v=sessionStorage.getItem(KEY+location.pathname);
+      if(v!==null)window.scrollTo({top:+v,behavior:'instant'});
+    }
+  }catch(e){}
+  var links=document.querySelectorAll('.fab.back,.crumb a,.close a.btn');
+  if(!links.length||document.referrer.indexOf(location.origin+'/')!==0||history.length<2)return;
+  Array.prototype.forEach.call(links,function(a){
+    a.addEventListener('click',function(e){
+      if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0)return;
+      e.preventDefault();
+      history.back();
+    });
+  });
+})();
+</script>
+<script>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
