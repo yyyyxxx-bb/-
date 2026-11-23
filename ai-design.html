@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI 设计 · 二十四节气 | ZeBin Tam</title>
+<style>
+  :root{--ink:#1d1d1f;--ink2:#6e6e73;--ink3:#86868b;--bgalt:#f5f5f7;--line:#e5e5ea;--paper:#fff}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  ::selection{background:var(--ink);color:#fff}
+  a{text-decoration:none;color:inherit}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+  .eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink3);font-weight:600}
+
+  .bar{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.78);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--line)}
+  .bar-in{max-width:1180px;margin:0 auto;padding:0 32px;height:58px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .bar a.go{font-size:14px;color:var(--ink2);font-weight:500}.bar a.go:hover{color:var(--ink)}
+  .bar .mid{font-size:14px;letter-spacing:.06em;font-weight:600;white-space:nowrap}
+  .bar .yr{font-size:13px;color:var(--ink3);white-space:nowrap}
+
+  .hero{position:relative;overflow:hidden;background:#080808;color:#fff}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 78% 36%,rgba(255,255,255,.07),transparent 42%),radial-gradient(circle at 14% 90%,rgba(255,255,255,.035),transparent 34%)}
+  .hero-in{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:88px 32px 76px;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr);gap:64px;align-items:center}
+  .hero .tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.18);padding:7px 14px;border-radius:999px}
+  .hero .tag i{width:7px;height:7px;border-radius:50%;background:#fff}
+  .hero h1{font-size:clamp(58px,9vw,118px);line-height:.9;font-weight:700;letter-spacing:-.055em;margin:28px 0 0}
+  .hero h1 small{display:block;font-size:clamp(16px,2.2vw,23px);line-height:1.4;font-weight:400;letter-spacing:.02em;color:rgba(255,255,255,.66);margin-top:24px}
+  .hero .desc{max-width:600px;margin-top:28px;font-size:16px;line-height:1.75;color:rgba(255,255,255,.55)}
+  .hero .desc b{color:#fff}
+  .hero-posters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;transform:rotate(1.5deg)}
+  .hero-posters img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:15px;border:1px solid rgba(255,255,255,.15);box-shadow:0 24px 60px rgba(0,0,0,.35)}
+  .hero-posters img:nth-child(2),.hero-posters img:nth-child(4){transform:translateY(18px)}
+  .crumb{margin-top:30px;font-size:13px;color:rgba(255,255,255,.5)}
+  .crumb a{color:#fff}
+
+  .intro{padding:88px 0 0}
+  .intro-grid{display:grid;grid-template-columns:1.22fr .78fr;gap:52px;align-items:start}
+  .intro h2{font-size:clamp(32px,4.8vw,54px);line-height:1.04;letter-spacing:-.035em;font-weight:600;margin:16px 0 0}
+  .intro h2 span{color:var(--ink3)}
+  .intro p{font-size:15px;line-height:1.75;color:var(--ink2);margin:0}
+  .intro p b{color:var(--ink)}
+  .num{margin-top:36px;font-size:clamp(46px,6vw,72px);line-height:1;font-weight:700;letter-spacing:-.05em}
+  .num span{color:var(--ink3);font-size:.4em;letter-spacing:0;vertical-align:top}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+  .meta-row span{border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:12px;color:var(--ink2)}
+
+  .gallery{padding:72px 0 104px}
+  .season{margin-top:76px}
+  .season:first-child{margin-top:0}
+  .season-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding-bottom:18px;border-bottom:1px solid var(--line);margin-bottom:30px}
+  .season-head h3{font-size:clamp(28px,4vw,42px);letter-spacing:-.03em;font-weight:650;margin:0}
+  .season-head h3 span{color:var(--ink3)}
+  .season-head p{margin:0;color:var(--ink3);font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+  .poster-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px 24px;align-items:start}
+  .poster{min-width:0;margin:0}
+  .poster .frame{position:relative;aspect-ratio:9/16;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#f4f4f4;cursor:zoom-in}
+  .poster .frame img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+  .poster .frame:hover img{transform:scale(1.018)}
+  .poster .index{position:absolute;top:12px;left:12px;display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:28px;padding:0 9px;border-radius:999px;background:rgba(0,0,0,.68);color:#fff;font-size:11px;letter-spacing:.12em;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .poster figcaption{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:13px}
+  .poster b{font-size:16px;letter-spacing:-.01em}
+  .poster figcaption span{font-size:12px;color:var(--ink3);text-align:right}
+
+  .close{background:#000;color:#fff;padding:88px 0}
+  .close .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:32px;align-items:center}
+  .close h4{font-size:clamp(26px,3.6vw,42px);line-height:1.05;letter-spacing:-.03em;font-weight:600;margin:12px 0 0}
+  .close h4 span{color:rgba(255,255,255,.5)}
+  .close .small{margin-top:16px;color:rgba(255,255,255,.45);font-size:13px}
+  .close a.btn{background:#fff;color:#000;border-radius:999px;padding:14px 26px;font-size:15px;font-weight:600}.close a.btn:hover{opacity:.85}
+  .eyebrow.light{color:rgba(255,255,255,.45)}
+  footer{border-top:1px solid var(--line);padding:30px 0 56px}
+  .foot{max-width:1180px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--ink3);font-size:12px}
+
+  .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:200;display:none;align-items:center;justify-content:center;cursor:zoom-out;padding:24px}
+  .lightbox.on{display:flex}
+  .lightbox img{width:auto;height:auto;max-width:92vw;max-height:92vh;border-radius:12px;box-shadow:0 30px 100px rgba(0,0,0,.5)}
+  .lightbox .x{position:absolute;top:20px;right:28px;color:#fff;font-size:32px;line-height:1;cursor:pointer;z-index:2}
+
+  .fab{position:fixed;z-index:150;display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.82);backdrop-filter:blur(12px) saturate(160%);-webkit-backdrop-filter:blur(12px) saturate(160%);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:9px 16px;font-size:13px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,.09);white-space:nowrap;transition:border-color .2s ease,color .2s ease}
+  .fab:hover{border-color:var(--ink);color:#000}
+  .fab svg{width:14px;height:14px;flex:0 0 auto}
+  .fab.back{top:74px;left:20px}
+  .fab.top{bottom:24px;right:24px}
+
+  @media(max-width:920px){
+    .hero-in{grid-template-columns:1fr;gap:48px;padding-top:72px}
+    .hero-posters{max-width:520px}
+    .intro-grid{grid-template-columns:1fr;gap:30px}
+    .poster-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+  @media(max-width:640px){
+    .bar-in,.hero-in,.wrap,.foot{padding-left:20px;padding-right:20px}
+    .bar .yr{display:none}.bar .mid{font-size:13px;letter-spacing:.02em}
+    .hero-in{padding-top:58px;padding-bottom:56px}
+    .hero-posters{gap:10px}
+    .intro{padding-top:70px}.gallery{padding-top:58px}.season{margin-top:58px}
+    .poster-grid{gap:26px 14px}
+    .poster .frame{border-radius:13px}
+    .poster .index{top:8px;left:8px;min-width:31px;height:24px;font-size:10px}
+    .poster figcaption{display:block;margin-top:10px}.poster b{font-size:14px}.poster figcaption span{display:block;margin-top:4px;text-align:left}
+    .fab{font-size:12px;padding:8px 13px}.fab.back{top:70px;left:14px}.fab.top{bottom:16px;right:14px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="bar"><div class="bar-in">
+  <a class="go" href="index.html">← 作品集 Portfolio</a>
+  <div class="mid">AI 设计 · AI Design</div>
+  <div class="yr">24 张 · 二十四节气</div>
+</div></nav>
+
+<header class="hero"><div class="hero-in">
+  <div>
+    <span class="tag"><i></i>AI Design · 二十四节气</span>
+    <h1>AI 设计<small>二十四节气 · Twenty-Four Solar Terms</small></h1>
+    <p class="desc">以节气为线索，将季节色彩、物候场景与品牌角色组合为二十四张竖版视觉海报。按 <b>01–24</b> 顺序完整呈现。</p>
+    <div class="crumb"><a href="index.html#ai-design">‹ 返回首页，查看全部分类</a></div>
+  </div>
+  <div class="hero-posters" aria-hidden="true">
+    <img src="assets/ai/solar-terms/01-thumb.jpg" alt="">
+    <img src="assets/ai/solar-terms/07-thumb.jpg" alt="">
+    <img src="assets/ai/solar-terms/13-thumb.jpg" alt="">
+    <img src="assets/ai/solar-terms/19-thumb.jpg" alt="">
+  </div>
+</div></header>
+
+<section class="intro"><div class="wrap"><div class="intro-grid">
+  <div><div class="eyebrow">Overview · 项目概览</div><h2>二十四张海报，<br>一年<span>四季的视觉叙事。</span></h2></div>
+  <div>
+    <p>围绕二十四节气展开的 AI 视觉设计系列，从春生、夏长到秋收、冬藏，用统一的版式结构与不同节气的色彩、景物和角色状态形成连续叙事。</p>
+    <div class="num">24<span> posters</span></div>
+    <div class="meta-row"><span>AI Visual</span><span>Seasonal Posters</span><span>9:16</span></div>
+  </div>
+</div></div></section>
+
+<main class="gallery"><div class="wrap">
+  <section class="season" aria-labelledby="spring">
+    <div class="season-head"><h3 id="spring">春 <span>/ Spring</span></h3><p>01–06</p></div>
+    <div class="poster-grid">
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/01-thumb.jpg" data-full="assets/ai/solar-terms/01-full.jpg" alt="立春 · 二十四节气 AI 设计海报"><span class="index">01</span></div><figcaption><b>立春</b><span>Beginning of Spring</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/02-thumb.jpg" data-full="assets/ai/solar-terms/02-full.jpg" alt="雨水 · 二十四节气 AI 设计海报"><span class="index">02</span></div><figcaption><b>雨水</b><span>Rain Water</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/03-thumb.jpg" data-full="assets/ai/solar-terms/03-full.jpg" alt="惊蛰 · 二十四节气 AI 设计海报"><span class="index">03</span></div><figcaption><b>惊蛰</b><span>Awakening of Insects</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/04-thumb.jpg" data-full="assets/ai/solar-terms/04-full.jpg" alt="春分 · 二十四节气 AI 设计海报"><span class="index">04</span></div><figcaption><b>春分</b><span>Spring Equinox</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/05-thumb.jpg" data-full="assets/ai/solar-terms/05-full.jpg" alt="清明 · 二十四节气 AI 设计海报"><span class="index">05</span></div><figcaption><b>清明</b><span>Pure Brightness</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/06-thumb.jpg" data-full="assets/ai/solar-terms/06-full.jpg" alt="谷雨 · 二十四节气 AI 设计海报"><span class="index">06</span></div><figcaption><b>谷雨</b><span>Grain Rain</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="season" aria-labelledby="summer">
+    <div class="season-head"><h3 id="summer">夏 <span>/ Summer</span></h3><p>07–12</p></div>
+    <div class="poster-grid">
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/07-thumb.jpg" data-full="assets/ai/solar-terms/07-full.jpg" alt="立夏 · 二十四节气 AI 设计海报"><span class="index">07</span></div><figcaption><b>立夏</b><span>Beginning of Summer</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/08-thumb.jpg" data-full="assets/ai/solar-terms/08-full.jpg" alt="小满 · 二十四节气 AI 设计海报"><span class="index">08</span></div><figcaption><b>小满</b><span>Grain Buds</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/09-thumb.jpg" data-full="assets/ai/solar-terms/09-full.jpg" alt="芒种 · 二十四节气 AI 设计海报"><span class="index">09</span></div><figcaption><b>芒种</b><span>Grain in Ear</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/10-thumb.jpg" data-full="assets/ai/solar-terms/10-full.jpg" alt="夏至 · 二十四节气 AI 设计海报"><span class="index">10</span></div><figcaption><b>夏至</b><span>Summer Solstice</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/11-thumb.jpg" data-full="assets/ai/solar-terms/11-full.jpg" alt="小暑 · 二十四节气 AI 设计海报"><span class="index">11</span></div><figcaption><b>小暑</b><span>Minor Heat</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/12-thumb.jpg" data-full="assets/ai/solar-terms/12-full.jpg" alt="大暑 · 二十四节气 AI 设计海报"><span class="index">12</span></div><figcaption><b>大暑</b><span>Major Heat</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="season" aria-labelledby="autumn">
+    <div class="season-head"><h3 id="autumn">秋 <span>/ Autumn</span></h3><p>13–18</p></div>
+    <div class="poster-grid">
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/13-thumb.jpg" data-full="assets/ai/solar-terms/13-full.jpg" alt="立秋 · 二十四节气 AI 设计海报"><span class="index">13</span></div><figcaption><b>立秋</b><span>Beginning of Autumn</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/14-thumb.jpg" data-full="assets/ai/solar-terms/14-full.jpg" alt="处暑 · 二十四节气 AI 设计海报"><span class="index">14</span></div><figcaption><b>处暑</b><span>End of Heat</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/15-thumb.jpg" data-full="assets/ai/solar-terms/15-full.jpg" alt="白露 · 二十四节气 AI 设计海报"><span class="index">15</span></div><figcaption><b>白露</b><span>White Dew</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/16-thumb.jpg" data-full="assets/ai/solar-terms/16-full.jpg" alt="秋分 · 二十四节气 AI 设计海报"><span class="index">16</span></div><figcaption><b>秋分</b><span>Autumnal Equinox</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/17-thumb.jpg" data-full="assets/ai/solar-terms/17-full.jpg" alt="霜降 · 二十四节气 AI 设计海报"><span class="index">17</span></div><figcaption><b>霜降</b><span>Frost's Descent</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/18-thumb.jpg" data-full="assets/ai/solar-terms/18-full.jpg" alt="寒露 · 二十四节气 AI 设计海报"><span class="index">18</span></div><figcaption><b>寒露</b><span>Cold Dew</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="season" aria-labelledby="winter">
+    <div class="season-head"><h3 id="winter">冬 <span>/ Winter</span></h3><p>19–24</p></div>
+    <div class="poster-grid">
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/19-thumb.jpg" data-full="assets/ai/solar-terms/19-full.jpg" alt="立冬 · 二十四节气 AI 设计海报"><span class="index">19</span></div><figcaption><b>立冬</b><span>Beginning of Winter</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/20-thumb.jpg" data-full="assets/ai/solar-terms/20-full.jpg" alt="小雪 · 二十四节气 AI 设计海报"><span class="index">20</span></div><figcaption><b>小雪</b><span>Minor Snow</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/21-thumb.jpg" data-full="assets/ai/solar-terms/21-full.jpg" alt="大雪 · 二十四节气 AI 设计海报"><span class="index">21</span></div><figcaption><b>大雪</b><span>Major Snow</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/22-thumb.jpg" data-full="assets/ai/solar-terms/22-full.jpg" alt="冬至 · 二十四节气 AI 设计海报"><span class="index">22</span></div><figcaption><b>冬至</b><span>Winter Solstice</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/23-thumb.jpg" data-full="assets/ai/solar-terms/23-full.jpg" alt="小寒 · 二十四节气 AI 设计海报"><span class="index">23</span></div><figcaption><b>小寒</b><span>Minor Cold</span></figcaption></figure>
+      <figure class="poster"><div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/ai/solar-terms/24-thumb.jpg" data-full="assets/ai/solar-terms/24-full.jpg" alt="大寒 · 二十四节气 AI 设计海报"><span class="index">24</span></div><figcaption><b>大寒</b><span>Major Cold</span></figcaption></figure>
+    </div>
+  </section>
+</div></main>
+
+<section class="close"><div class="wrap"><div>
+  <div class="eyebrow light">Next · 下一步</div>
+  <h4>让时间，<span>继续生长。</span></h4>
+  <p class="small">AI Design · Twenty-Four Solar Terms</p>
+</div><div><a class="btn" href="index.html">回到作品集 Home</a></div></div></section>
+
+<footer><div class="foot"><span>© 2026 ZeBin Tam · 谭泽斌</span><span>AI 设计 · Twenty-Four Solar Terms</span></div></footer>
+
+<div class="lightbox" id="lb" onclick="if(event.target===this)closeLB()">
+  <span class="x" onclick="closeLB()">×</span>
+  <img id="lbimg" alt="">
+</div>
+
+<a class="fab back" href="index.html#ai-design" title="返回上一级" aria-label="返回上一级"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>返回上一级</a>
+<a class="fab top" href="#" title="回到顶部" aria-label="回到顶部" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">回到顶部<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></a>
+
+<script>
+function lb(frame){
+  var source=frame.querySelector("img");
+  var full=source.getAttribute("data-full")||source.src;
+  var box=document.getElementById("lb");
+  var image=document.getElementById("lbimg");
+  image.src=full;
+  image.alt=source.alt;
+  box.classList.add("on");
+}
+function closeLB(){
+  document.getElementById("lb").classList.remove("on");
+  document.getElementById("lbimg").removeAttribute("src");
+}
+document.addEventListener("keydown",function(event){
+  if(event.key==="Escape")closeLB();
+});
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?0d3686590ee12226c7c067b6c3b793cf";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</body>
+</html>

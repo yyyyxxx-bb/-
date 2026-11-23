@@ -47,6 +47,15 @@
   .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:44px;align-items:start}
   .grid3 .board{margin-top:0}
   .grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;margin-top:44px;align-items:start}
+  .series-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 28px;margin-top:44px;align-items:start;scroll-margin-top:84px}
+  .series-grid .board{margin-top:0}.series-grid>*{min-width:0}
+  .series-frame{aspect-ratio:5/3;background:#f4efd9;border-color:rgba(0,0,0,.06);display:flex;align-items:center}
+  .series-frame img{width:100%;height:100%;object-fit:contain}
+  .merch-feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin-top:44px;align-items:start}
+  .merch-feature-grid>*{min-width:0}.merch-feature-grid .board,.merch-stack .board{margin-top:0}
+  .merch-stack{display:grid;gap:28px}
+  .merch-stack .frame{aspect-ratio:4/3;background:#f4efd9;border-color:rgba(0,0,0,.06);display:flex;align-items:center}
+  .merch-stack .frame img{width:100%;height:100%;object-fit:contain}
   .grid4 .board{margin-top:0}
   .duo>*,.grid2>*,.grid3>*,.grid4>*{min-width:0}
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
@@ -77,7 +86,7 @@
   .lightbox.tall{overflow:auto;align-items:flex-start;cursor:default}
   .lightbox.tall img{width:min(94vw,820px);max-width:none;max-height:none;margin:56px auto}
   .lightbox .x{position:absolute;top:20px;right:28px;color:#fff;font-size:32px;line-height:1;cursor:pointer;z-index:2}
-  @media(max-width:820px){.bar-in,.hero-in,.wrap{padding-left:20px;padding-right:20px}.intro-grid{grid-template-columns:1fr;gap:28px}.intro p{max-width:none}.hero-in{padding:66px 20px 52px}.sec-label{margin-top:66px}.duo,.grid2,.grid3{grid-template-columns:1fr}.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}.note{flex-direction:column;gap:8px}.handbook{margin-top:52px;padding:32px 26px;gap:22px}}
+  @media(max-width:820px){.bar-in,.hero-in,.wrap{padding-left:20px;padding-right:20px}.intro-grid{grid-template-columns:1fr;gap:28px}.intro p{max-width:none}.hero-in{padding:66px 20px 52px}.sec-label{margin-top:66px}.duo,.grid2,.grid3,.series-grid,.merch-feature-grid{grid-template-columns:1fr}.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}.note{flex-direction:column;gap:8px}.handbook{margin-top:52px;padding:32px 26px;gap:22px}}
   @media(max-width:640px){.bar .yr{display:none}.bar .mid{font-size:13px;letter-spacing:.02em}.fab{font-size:12px;padding:8px 13px}.fab.back{top:70px;left:14px}.fab.top{bottom:16px;right:14px}}
 </style></head>
 <body>
@@ -258,7 +267,7 @@
 
   <!-- ================= 03 周边设计 ================= -->
   <div class="sec-label reveal"><span class="n">03</span><h3>周边设计</h3><span class="en">Merch</span></div>
-  <p class="sec-note reveal">门店文创与体验周边：拍摄指引卡、拍照资格卡、财神系列卡、开业小扇子、手提袋与主题门票，共 8 件。</p>
+  <p class="sec-note reveal">门店文创与体验周边：拍摄指引卡、拍照资格卡、财神系列卡、开业小扇子、手提袋与主题门票，共 9 件。</p>
 
   <div class="duo">
     <figure class="board reveal">
@@ -273,43 +282,47 @@
     </figure>
   </div>
 
-  <div class="duo">
+  <div class="series-grid" id="merch-series">
     <figure class="board reveal">
       <div class="brow"><span>03.3</span><span class="en">Yue Caishen Series</span></div>
-      <div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/practice/sixi/sx-merch-03.jpg" alt="四喜财神潮玩 粤财神系列卡"></div>
+      <div class="frame series-frame" onclick="lb(this)"><img loading="lazy" src="assets/practice/sixi/sx-merch-03.jpg" alt="四喜财神潮玩 粤财神系列卡"></div>
       <figcaption class="note"><b>粤财神系列卡</b><p>14 款配色</p></figcaption>
     </figure>
     <figure class="board reveal">
       <div class="brow"><span>03.4</span><span class="en">Lion Dance Series</span></div>
-      <div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/practice/sixi/sx-merch-05.jpg" alt="四喜财神潮玩 醒狮系列卡"></div>
+      <div class="frame series-frame" onclick="lb(this)"><img loading="lazy" src="assets/practice/sixi/sx-merch-05.jpg" alt="四喜财神潮玩 醒狮系列卡"></div>
       <figcaption class="note"><b>醒狮系列卡</b><p>12 款配色</p></figcaption>
     </figure>
-  </div>
-
-  <div class="duo">
     <figure class="board reveal">
-      <div class="brow"><span>03.5</span><span class="en">Classic Series</span></div>
-      <div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/practice/sixi/sx-merch-04.jpg" alt="四喜财神潮玩 经典财神系列卡"></div>
+      <div class="brow"><span>03.5</span><span class="en">New Caishen Series</span></div>
+      <div class="frame series-frame" onclick="lb(this)"><img loading="lazy" src="assets/practice/sixi/sx-merch-09.jpg" alt="四喜财神潮玩 新财神系列卡"></div>
+      <figcaption class="note"><b>新财神系列卡</b><p>24 款配色</p></figcaption>
+    </figure>
+    <figure class="board reveal">
+      <div class="brow"><span>03.6</span><span class="en">Classic Series</span></div>
+      <div class="frame series-frame" onclick="lb(this)"><img loading="lazy" src="assets/practice/sixi/sx-merch-04.jpg" alt="四喜财神潮玩 经典财神系列卡"></div>
       <figcaption class="note"><b>经典财神系列卡</b><p>20 款配色</p></figcaption>
     </figure>
-    <figure class="board reveal">
-      <div class="brow"><span>03.6</span><span class="en">Opening Fans</span></div>
-      <div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/practice/sixi/sx-merch-06.jpg" alt="四喜财神潮玩 开业小扇子"></div>
-      <figcaption class="note"><b>开业小扇子</b><p>来财 · 迎财神</p></figcaption>
-    </figure>
   </div>
 
-  <div class="duo">
-    <figure class="board reveal">
+  <div class="merch-feature-grid" id="merch-features">
+    <figure class="board reveal merch-tote">
       <div class="brow"><span>03.7</span><span class="en">Tote Bag</span></div>
       <div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/practice/sixi/sx-merch-07.jpg" alt="四喜财神潮玩 主题手提袋"></div>
       <figcaption class="note"><b>主题手提袋</b><p>正反双面</p></figcaption>
     </figure>
-    <figure class="board reveal">
-      <div class="brow"><span>03.8</span><span class="en">Ticket</span></div>
-      <div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/practice/sixi/sx-merch-08.jpg" alt="四喜财神潮玩 主题门票"></div>
-      <figcaption class="note"><b>主题门票</b><p>全票 · 正反面</p></figcaption>
-    </figure>
+    <div class="merch-stack">
+      <figure class="board reveal">
+        <div class="brow"><span>03.8</span><span class="en">Opening Fans</span></div>
+        <div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/practice/sixi/sx-merch-06.jpg" alt="四喜财神潮玩 开业小扇子"></div>
+        <figcaption class="note"><b>开业小扇子</b><p>来财 · 迎财神</p></figcaption>
+      </figure>
+      <figure class="board reveal">
+        <div class="brow"><span>03.9</span><span class="en">Ticket</span></div>
+        <div class="frame" onclick="lb(this)"><img loading="lazy" src="assets/practice/sixi/sx-merch-08.jpg" alt="四喜财神潮玩 主题门票"></div>
+        <figcaption class="note"><b>主题门票</b><p>全票 · 正反面</p></figcaption>
+      </figure>
+    </div>
   </div>
 
   <!-- ================= 04 展板与展陈 ================= -->
@@ -454,6 +467,19 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
     });
   });
 })();
+</script>
+<script>
+/* 预览锚点：等待图片布局稳定后，再定位到本次更新的板块 */
+if(location.hash==='#merch-series'){
+  window.addEventListener('load',function(){
+    var target=document.getElementById('merch-series');
+    if(!target)return;
+    var align=function(){target.scrollIntoView({block:'start'})};
+    align();
+    setTimeout(align,500);
+    setTimeout(align,1500);
+  });
+}
 </script>
 <script>
 var _hmt = _hmt || [];
